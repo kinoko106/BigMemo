@@ -5,8 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BigMemo"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" 
+        d:DesignHeight="{Binding Height}" 
+        d:DesignWidth="{Binding Width}"
+        Height="{Binding Height,Mode=TwoWay}" 
+        Width="{Binding Width,Mode=TwoWay}" 
+        Top="{Binding Top,Mode=TwoWay}"
+        Left="{Binding Left,Mode=TwoWay}"
+        Background="#313131">
+    <Window.DataContext>
+        <local:MainWindowViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="./Resources/Resources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"></ColumnDefinition>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Button Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource ButtonBase}" Content="▽"></Button>
+        <local:MultiMemo Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3"></local:MultiMemo>
+        <TreeView Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"></TreeView>
     </Grid>
 </Window>
